@@ -10,11 +10,10 @@ import org.jsoup.*;
 import static org.junit.Assert.*;
 
 public class Stepdefs {
-    private WebDriver webDriver;
     private String today;
     private String actualAnswer;
 
-    static String isItFriday(String today) {
+    private static String isItFriday(String today) {
         return "No";
     }
 
@@ -31,25 +30,5 @@ public class Stepdefs {
     @Then("I should be told {string}")
     public void i_should_be_told(String expectedAnswer) {
         assertEquals(actualAnswer, expectedAnswer);
-    }
-
-    @Then("I should be able to pull the HTML and print it")
-    public void iShouldBeAbleToPullTheHTMLAndPrintIt() {
-    }
-
-    @When("I navigate to {string}")
-    public void iNavigateTo(String url) {
-        webDriver.get(url);
-        String html = webDriver.getPageSource();
-        Document document = Jsoup.parse(html);
-        System.out.println(document.title());
-        webDriver.quit();
-    }
-
-    @Given("I have a {string} instance")
-    public void iHaveAInstance(String driver) {
-        System.out.println("Driver: " + driver);
-        System.setProperty("webdriver.chrome.driver", "C:\\webdriver\\chromedriver_v78\\chromedriver.exe");
-        webDriver = new ChromeDriver();
     }
 }
