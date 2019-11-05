@@ -2,12 +2,9 @@ package selfheal;
 
 import cucumber.api.java.en.*;
 import io.nickbaynham.automation.selfhealing.*;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-import static org.junit.Assert.*;
 import static io.nickbaynham.automation.selfhealing.WebController.*;
 import static io.nickbaynham.automation.selfhealing.DocumentController.*;
+import static org.junit.Assert.*;
 
 public class SelfHealStepdefs {
 
@@ -34,11 +31,6 @@ public class SelfHealStepdefs {
         setPageSource(html());
     }
 
-    @Given("I have a {string} instance")
-    public void iHaveAnInstance(String driver) {
-        chrome();
-    }
-
     @Then("I close the browser")
     public void iCloseTheBrowser() {
         quit();
@@ -54,6 +46,11 @@ public class SelfHealStepdefs {
 
     @Then("I enter {string} in the {string} field")
     public void iEnterInTheField(String text, String field) {
-        StrategyController.applyInputStrategy(field, text);
+        StrategyController.applyFuzzyIdStrategyToInput(field, text);
+    }
+
+    @Given("I have a {string} browser open")
+    public void iHaveABrowserOpen(String browser) {
+        chrome();
     }
 }
