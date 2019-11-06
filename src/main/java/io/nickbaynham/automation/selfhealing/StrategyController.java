@@ -60,4 +60,53 @@ public class StrategyController {
         String css = buttonElements.get(extractedResult.getString()).cssSelector();
         click(css);
     }
+
+    public static void applyFuzzyTextStrategyAllAttributes(String matcher, String text) {
+
+        // Find the best Input
+
+        List<String> idList = new ArrayList<>();
+        List<String> nameList = new ArrayList<>();
+        List<String> valueList = new ArrayList<>();
+        List<Element> elementList = new ArrayList<>();
+        for (Element element : DocumentController.getInputs()) {
+            idList.add(element.id());
+            nameList.add(element.attr("name"));
+            valueList.add(element.val());
+            elementList.add(element);
+        }
+
+        List<String> bestList = new ArrayList<>();
+        List<Element> bestElements = new ArrayList<>();
+        ExtractedResult best = FuzzySearch.extractOne(matcher, idList);
+        bestList.add(best.getString());
+        bestElements.add(elementList.get(best.getIndex()));
+        bestList.add(FuzzySearch.extractOne(matcher, nameList).getString());
+
+        best = FuzzySearch.extractOne(matcher, nameList);
+        bestList.add(best.getString());
+        bestElements.add(elementList.get(best.getIndex()));
+
+        best = FuzzySearch.extractOne(matcher, valueList);
+        bestList.add(best.getString());
+        bestElements.add(elementList.get(best.getIndex()));
+        final ExtractedResult bestResult = FuzzySearch.extractOne(matcher, bestList);
+
+        String css = bestElements.get(bestResult.getIndex()).cssSelector();
+        enterText(css, text);
+    }
+
+//    private static String getCssSelector(String matcher) {
+//        List<String> keys = new ArrayList<>();
+//        Map<String, Element> elements = new HashMap<>();
+//        for (Element element : DocumentController.getInputs()) {
+//            //inputIds.add(input.id());
+//            //inputElements.put(input.id(), input);
+//        }
+//
+//        // Next we need to generate a fuzzy search on the Id Text
+//        final ExtractedResult extractedResult = FuzzySearch.extractOne(field, inputIds);
+//        //String css = inputElements.get(extractedResult.getString()).cssSelector();
+//        return css;
+//    }
 }

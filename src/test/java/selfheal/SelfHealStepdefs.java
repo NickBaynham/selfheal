@@ -46,7 +46,7 @@ public class SelfHealStepdefs {
 
     @Then("I enter {string} in the {string} field")
     public void iEnterInTheField(String text, String field) {
-        StrategyController.applyFuzzyIdStrategyToInput(field, text);
+        StrategyController.applyFuzzyTextStrategyAllAttributes(field, text);
     }
 
     @Given("I have a {string} browser open")

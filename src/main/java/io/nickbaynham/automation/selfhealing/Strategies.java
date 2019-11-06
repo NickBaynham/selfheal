@@ -3,18 +3,15 @@ package io.nickbaynham.automation.selfhealing;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Strategies {
+class Strategies {
 
     private List<Strategy> strategies = new ArrayList<>();
 
-    public List<Strategy> getStrategies() {
+    List<Strategy> getStrategies() {
         return strategies;
     }
 
-    public Strategies() {
+    Strategies() {
         strategies.add(new Strategy());
     }
 }
-
-
-
