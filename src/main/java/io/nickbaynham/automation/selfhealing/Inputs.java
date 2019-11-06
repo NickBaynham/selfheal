@@ -19,6 +19,7 @@ public class Inputs {
             String name = input.attr("name");
             String text = input.text();
             String css = input.cssSelector();
+            String innerText = input.text();
             ElementObject elementObject = new ElementObject();
             elementObject.setTag(ElementTag.valueOf(tag));
             elementObject.setId(id);

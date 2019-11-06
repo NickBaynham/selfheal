@@ -53,4 +53,9 @@ public class SelfHealStepdefs {
     public void iHaveABrowserOpen(String browser) {
         chrome();
     }
+
+    @Then("I click the {string} button")
+    public void iClickTheButton(String label) {
+        StrategyController.applyFuzzyTextStrategyToButton(label);
+    }
 }

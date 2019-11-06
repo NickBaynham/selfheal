@@ -6,6 +6,7 @@ public class ElementObject {
     private String name;
     private String text;
     private String css;
+    private String innerText;
 
     void setCss(String css) {
         this.css = css;
@@ -29,5 +30,13 @@ public class ElementObject {
 
     public String getId() {
         return id;
+    }
+
+    void setInnerText(String innerText) {
+        this.innerText = innerText;
+    }
+
+    public String getInnerText() {
+        return innerText;
     }
 }

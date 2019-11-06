@@ -11,6 +11,10 @@ public class WebController {
         driver.findElement(By.cssSelector(locator)).sendKeys(text);
     }
 
+    static void click(String locator) {
+        driver.findElement(By.cssSelector(locator)).click();
+    }
+
     public static void chrome() {
         System.setProperty("webdriver.chrome.driver", "C:\\webdriver\\chromedriver_v78\\chromedriver.exe");
         driver = new ChromeDriver();

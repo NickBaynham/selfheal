@@ -13,6 +13,7 @@ import java.util.Map;
 import static io.nickbaynham.automation.selfhealing.WebController.*;
 
 public class StrategyController {
+
     public static void applyInputStrategy(String field, String text) {
         for (Strategy strategy : new Strategies().getStrategies()) {
             if (strategy.getTag().equals(ElementTag.input)) {
@@ -42,5 +43,21 @@ public class StrategyController {
         final ExtractedResult extractedResult = FuzzySearch.extractOne(field, inputIds);
         String css = inputElements.get(extractedResult.getString()).cssSelector();
         enterText(css, text);
+    }
+
+    public static void applyFuzzyTextStrategyToButton(String field) {
+
+        // we need a map of buttons by their inner text (labels)
+        List<String> buttonText = new ArrayList<>();
+        Map<String, Element> buttonElements = new HashMap<>();
+        for (Element button : DocumentController.getInputs()) {
+            buttonText.add(button.text());
+            buttonElements.put(button.text(), button);
+        }
+
+        // Next we need to generate a fuzzy search on the Id Text
+        final ExtractedResult extractedResult = FuzzySearch.extractOne(field, buttonText);
+        String css = buttonElements.get(extractedResult.getString()).cssSelector();
+        click(css);
     }
 }

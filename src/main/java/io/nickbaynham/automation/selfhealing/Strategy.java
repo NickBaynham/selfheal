@@ -1,8 +1,8 @@
 package io.nickbaynham.automation.selfhealing;
 
 public class Strategy {
-    private ElementTag tag = ElementTag.input;
-    private Attribute attribute = Attribute.id;
+    private ElementTag tag;
+    private Attribute attribute;
     private String css;
 
     public void setTag(ElementTag tag) {
