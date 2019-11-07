@@ -43,4 +43,43 @@ public class TestElementFinder {
         System.out.println(documentController.getFuzzyMatch("input", "cool", "Occu"));
         System.out.println(documentController.getFuzzyMatch("input", "placeholder", "Food Choice"));
     }
+
+    @Test
+    public void testMultiAttributeFuzzySearch() throws IOException {
+        String[] attributes = {
+                "id",
+                "name",
+                "something",
+                "cool",
+                "placeholder"
+        };
+        File input = new File("src/test/resources/html//example2a.html");
+        DocumentController documentController = new DocumentController(input);
+        System.out.println(documentController.getFuzzyMatch(attributes, "input", "First"));
+        System.out.println(documentController.getFuzzyMatch(attributes, "input", "Last Name"));
+        System.out.println(documentController.getFuzzyMatch(attributes, "input", "Your Age"));
+        System.out.println(documentController.getFuzzyMatch(attributes, "input", "Occu"));
+        System.out.println(documentController.getFuzzyMatch(attributes, "input", "Food Choice"));
+    }
+
+    @Test
+    public void testFuzzySearchIncludesText() throws IOException {
+        String[] attributes = {
+                "id",
+                "name",
+                "something",
+                "cool",
+                "placeholder",
+                "value"
+        };
+        File input = new File("src/test/resources/html//example3b.html");
+        DocumentController documentController = new DocumentController(input);
+        System.out.println(documentController.getFuzzyMatch(attributes, "input", "First"));
+        System.out.println(documentController.getFuzzyMatch(attributes, "input", "Last Name"));
+        System.out.println(documentController.getFuzzyMatch(attributes, "input", "Your Age"));
+        System.out.println(documentController.getFuzzyMatch(attributes, "input", "Occu"));
+        System.out.println(documentController.getFuzzyMatch(attributes, "input", "Food Choice"));
+        System.out.println(documentController.getFuzzyMatch(attributes, "button", "save"));
+        System.out.println(documentController.getFuzzyMatch(attributes, "button", "cancel"));
+    }
 }

@@ -18,7 +18,8 @@ public class DocumentController {
     private static String pageSource;
     private static Elements inputs;
     private static final String[] TAG_NAMES = {
-        "input"
+        "input",
+        "button"
     };
 
     private String html;
@@ -109,4 +110,40 @@ public class DocumentController {
     public static String[] getTagNames() {
         return TAG_NAMES;
     }
+
+    public String getFuzzyMatch(String[] attributes, String tag, String value) {
+
+        // Initialize Result Set
+        int score = 0;
+        String cssSelector = null;
+        Elements tagElements = elements.get(tag);
+        if (tagElements == null) return null;
+        List<String> values = new ArrayList<>();
+
+        // Fuzzy Search by Inner Text
+
+        for (Element tagElement : tagElements) {
+            values.add(tagElement.wholeText());
+        }
+
+        ExtractedResult result = FuzzySearch.extractOne(value, values);
+        score = result.getScore();
+        cssSelector = tagElements.get(result.getIndex()).cssSelector();
+
+        // Fuzzy Search by Attribute Value
+
+        for (String attribute : attributes) {
+            values = new ArrayList<>();
+            for (Element tagElement : tagElements) {
+                values.add(tagElement.attr(attribute));
+            }
+            result = FuzzySearch.extractOne(value, values);
+            if (result.getScore() >= score) {
+                score = result.getScore();
+                cssSelector = tagElements.get(result.getIndex()).cssSelector();
+            }
+        }
+        return cssSelector;
+    }
 }
+
