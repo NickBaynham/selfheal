@@ -1,6 +1,6 @@
 Feature: As a tester, I want to fill out the form on the page and save it
   Scenario: Form Entry using automatic locators
-    Given I have a "Chrome" browser open
+    Given I have a "Chrome" browser
     When I navigate to "http://localhost:1337/example3b.html"
     Then I enter "Scott" in the "first Name" field
     Then I enter "Steele" in the "last" field

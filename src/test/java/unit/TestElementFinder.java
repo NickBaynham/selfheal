@@ -1,10 +1,12 @@
 package unit;
 
 import io.nickbaynham.automation.selfhealing.DocumentController;
+import io.nickbaynham.automation.selfhealing.ElementNotFoundException;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import static org.junit.Assert.*;
 
 public class TestElementFinder {
     @Test
@@ -12,7 +14,7 @@ public class TestElementFinder {
 
         // Create a Document Object that represents the actual HTML document in memory
         String html = "<html><body><input id=\"firstName\"></input></body></html>";
-        DocumentController documentController = new DocumentController(html);
+        DocumentController documentController = DocumentController.getInstance(html);
         System.out.println(documentController.getHtml());
         System.out.println(documentController.getDocument());
         System.out.println(documentController.getElementsByTag("input"));
@@ -45,7 +47,7 @@ public class TestElementFinder {
     }
 
     @Test
-    public void testMultiAttributeFuzzySearch() throws IOException {
+    public void testMultiAttributeFuzzySearch() throws IOException, ElementNotFoundException {
         String[] attributes = {
                 "id",
                 "name",
@@ -63,7 +65,7 @@ public class TestElementFinder {
     }
 
     @Test
-    public void testFuzzySearchIncludesText() throws IOException {
+    public void testFuzzySearchIncludesText() throws IOException, ElementNotFoundException {
         String[] attributes = {
                 "id",
                 "name",
@@ -84,7 +86,7 @@ public class TestElementFinder {
     }
 
     @Test
-    public void testFuzzySearchIncludesLabel() throws IOException {
+    public void testFuzzySearchIncludesLabel() throws IOException, ElementNotFoundException {
         String[] attributes = {
                 "id",
                 "name",
@@ -100,5 +102,13 @@ public class TestElementFinder {
         System.out.println(documentController.getFuzzyMatch(attributes, "input", "Your Age"));
         System.out.println(documentController.getFuzzyMatch(attributes, "input", "Occu"));
         System.out.println(documentController.getFuzzyMatch(attributes, "input", "Food Choice"));
+
+        // We should get an exception
+
+        try {
+            documentController.getFuzzyMatch(attributes, "button", "Save");
+        } catch (ElementNotFoundException e) {
+            assertEquals(e.getMessage(), "Element Not Found: button=Save");
+        }
     }
 }

@@ -7,11 +7,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class WebController {
     private static WebDriver driver;
 
-    static void enterText(String locator, String text) {
+    public static void enterText(String locator, String text) {
         driver.findElement(By.cssSelector(locator)).sendKeys(text);
     }
 
-    static void click(String locator) {
+    public static void click(String locator) {
         driver.findElement(By.cssSelector(locator)).click();
     }
 
