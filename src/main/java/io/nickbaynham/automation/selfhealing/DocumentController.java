@@ -19,7 +19,8 @@ public class DocumentController {
     private static Elements inputs;
     private static final String[] TAG_NAMES = {
         "input",
-        "button"
+        "button",
+        "label"
     };
 
     private String html;
@@ -114,6 +115,7 @@ public class DocumentController {
     public String getFuzzyMatch(String[] attributes, String tag, String value) {
 
         // Initialize Result Set
+
         int score = 0;
         String cssSelector = null;
         Elements tagElements = elements.get(tag);
@@ -129,6 +131,22 @@ public class DocumentController {
         ExtractedResult result = FuzzySearch.extractOne(value, values);
         score = result.getScore();
         cssSelector = tagElements.get(result.getIndex()).cssSelector();
+
+        // Fuzzy Search by Label
+
+        Elements labels = elements.get("label");
+        values = new ArrayList<>();
+        for (Element label : labels) {
+            values.add(label.wholeText());
+        }
+
+        result = FuzzySearch.extractOne(value, values);
+        if (result.getScore() > score) {
+            score = result.getScore();
+            String id = labels.get(result.getIndex()).attr("for");
+            cssSelector = document.attr("id", id).cssSelector();
+        }
+
 
         // Fuzzy Search by Attribute Value
 

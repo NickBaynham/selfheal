@@ -82,4 +82,23 @@ public class TestElementFinder {
         System.out.println(documentController.getFuzzyMatch(attributes, "button", "save"));
         System.out.println(documentController.getFuzzyMatch(attributes, "button", "cancel"));
     }
+
+    @Test
+    public void testFuzzySearchIncludesLabel() throws IOException {
+        String[] attributes = {
+                "id",
+                "name",
+                "something",
+                "cool",
+                "placeholder",
+                "value"
+        };
+        File input = new File("src/test/resources/html//labels.html");
+        DocumentController documentController = new DocumentController(input);
+        System.out.println(documentController.getFuzzyMatch(attributes, "input", "First Name"));
+        System.out.println(documentController.getFuzzyMatch(attributes, "input", "Last Name"));
+        System.out.println(documentController.getFuzzyMatch(attributes, "input", "Your Age"));
+        System.out.println(documentController.getFuzzyMatch(attributes, "input", "Occu"));
+        System.out.println(documentController.getFuzzyMatch(attributes, "input", "Food Choice"));
+    }
 }
