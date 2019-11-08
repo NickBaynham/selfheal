@@ -26,11 +26,21 @@ public class SelfHealStepdefs {
 
     @Then("I enter {string} in the {string} field")
     public void iEnterInTheField(String text, String element) throws ElementNotFoundException {
+        highlight(getInputLocator(element));
         enterText(getInputLocator(element), text);
     }
 
     @Then("I click the {string} button")
     public void iClickTheButton(String token) throws ElementNotFoundException {
         click(getButtonLocator(token));
+    }
+
+    @Then("I enter {string} in the {string} field with test info displayed in a popover")
+    public void iEnterInTheFieldWithTestInfoDisplayedInAPopover(String text, String label) throws ElementNotFoundException {
+        System.out.println("Enter '" + text + "' in an input that is labelled '" + label + "'");
+        injectPopover(getInputLocator(label), label, text, "input");
+        highlight(getInputLocator(label));
+        enterText(getInputLocator(label), text);
+        highlight(getInputLocator(label));
     }
 }
