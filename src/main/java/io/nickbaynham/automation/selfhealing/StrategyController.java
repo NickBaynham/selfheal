@@ -1,5 +1,7 @@
 package io.nickbaynham.automation.selfhealing;
 
+import io.nickbaynham.automation.garbage.DocumentController;
+
 public class StrategyController {
 
     private static final String[] attributes = {

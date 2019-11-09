@@ -1,7 +1,7 @@
 package io.nickbaynham.automation.selfhealing;
 
 public class ElementNotFoundException extends Exception {
-    ElementNotFoundException(String value) {
+    public ElementNotFoundException(String value) {
         super(value);
     }
 }

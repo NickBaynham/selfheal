@@ -1,6 +1,6 @@
 package unit;
 
-import io.nickbaynham.automation.selfhealing.DocumentController;
+import io.nickbaynham.automation.garbage.DocumentController;
 import io.nickbaynham.automation.selfhealing.ElementNotFoundException;
 import org.junit.Test;
 
