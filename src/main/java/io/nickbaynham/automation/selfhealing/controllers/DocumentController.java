@@ -130,13 +130,28 @@ public class DocumentController implements Locate {
         // Initialize Result Set
 
         int score = 0;
-        String cssSelector = null;
-        List<String> values = new ArrayList<>();
-        Elements tagElements = elements.get(tag.toString());
+        Elements tagElements = null;
+
+        // Filter By Element Type
+
+        if (tag.equals(Tag.checkbox)) {
+            tagElements = elements.get("input");
+            Elements checkboxElements = new Elements();
+            for (Element element : tagElements) {
+                if (element.attr("type").equals("checkbox")) {
+                    checkboxElements.add(element);
+                }
+            }
+            tagElements = checkboxElements;
+        } else {
+            tagElements = elements.get(tag.toString());
+        }
         if (tagElements == null || tagElements.isEmpty()) throw new ElementNotFoundException("Element Not Found: " + tag + "=" + matcher);
 
         // Fuzzy Search by Inner Text
 
+        String cssSelector = null;
+        List<String> values = new ArrayList<>();
         for (Element tagElement : tagElements) {
             values.add(tagElement.wholeText());
         }

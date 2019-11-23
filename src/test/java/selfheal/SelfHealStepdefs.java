@@ -9,6 +9,9 @@ import io.nickbaynham.automation.selfhealing.Tag;
 import io.nickbaynham.automation.selfhealing.controllers.WebController;
 import io.nickbaynham.automation.selfhealing.controllers.DocumentController;
 import io.nickbaynham.automation.selfhealing.controllers.ElementNotFoundException;
+import org.openqa.selenium.WebElement;
+
+import static junit.framework.TestCase.*;
 
 public class SelfHealStepdefs {
 
@@ -56,5 +59,29 @@ public class SelfHealStepdefs {
     @And("I inject bootstrap into the page")
     public void iInjectBootsrapIntoThePage() {
         // injectBootstrap();
+    }
+
+    @Then("checkbox named {string} is not selected")
+    public void checkboxNamedIsNotSelected(String token) throws ElementNotFoundException {
+        String checkBox = doc.getLocator(Tag.checkbox, token);
+        System.out.println("Verify that " + token + " is not selected.");
+        actions.highlight(checkBox);
+        assertFalse(query.isSelected(checkBox));
+    }
+
+    @Then("checkbox named {string} is selected")
+    public void checkboxNamedIsSelected(String token) throws ElementNotFoundException {
+        String checkBox = doc.getLocator(Tag.checkbox, token);
+        System.out.println("Verify that " + token + " is selected.");
+        actions.highlight(checkBox);
+        assertTrue(query.isSelected(checkBox));
+    }
+
+    @When("I click the {string} checkbox")
+    public void iClickTheCheckbox(String token) throws ElementNotFoundException {
+        String checkBox = doc.getLocator(Tag.checkbox, token);
+        System.out.println("Toggle " + token + " with locator: " + checkBox);
+        actions.highlight(checkBox);
+        actions.click(checkBox);
     }
 }

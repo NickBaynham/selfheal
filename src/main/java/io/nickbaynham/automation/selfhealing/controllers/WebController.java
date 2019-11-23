@@ -75,7 +75,7 @@ public class WebController implements WebAction, WebQuery {
     }
 
     private void chrome() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver78.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\webdriver\\chromedriver_v78\\chromedriver.exe");
         driver = new ChromeDriver();
     }
 
@@ -183,18 +183,22 @@ public class WebController implements WebAction, WebQuery {
     }
 
     @Override
-    public boolean isVisible(String element) {
-        return false;
+    public boolean isVisible(String locator) {
+        return driver.findElement(By.cssSelector(locator)).isDisplayed();
     }
 
     @Override
-    public boolean isEnabled(String element) {
-        return false;
+    public boolean isEnabled(String locator) {
+        return driver.findElement(By.cssSelector(locator)).isEnabled();
+    }
+
+    public boolean isSelected(String locator) {
+        return driver.findElement(By.cssSelector(locator)).isSelected();
     }
 
     @Override
-    public boolean isPresent(String element) {
-        return false;
+    public boolean isPresent(String locator) {
+        return driver.findElements(By.cssSelector(locator)).size() == 1;
     }
 
     @Override
