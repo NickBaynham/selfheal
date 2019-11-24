@@ -143,6 +143,16 @@ public class DocumentController implements Locate {
                 }
             }
             tagElements = checkboxElements;
+        } else if (tag.equals(Tag.radio)){
+            tagElements = elements.get("input");
+            Elements checkboxElements = new Elements();
+            for (Element element : tagElements) {
+                if (element.attr("type").equals("radio")) {
+                    checkboxElements.add(element);
+                }
+            }
+            tagElements = checkboxElements;
+
         } else {
             tagElements = elements.get(tag.toString());
         }

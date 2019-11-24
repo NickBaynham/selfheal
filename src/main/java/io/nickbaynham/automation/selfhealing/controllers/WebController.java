@@ -1,14 +1,23 @@
 package io.nickbaynham.automation.selfhealing.controllers;
 
 import io.nickbaynham.automation.selfhealing.BrowserNotAvailableException;
+import io.nickbaynham.automation.selfhealing.Tag;
 import io.nickbaynham.automation.selfhealing.WebAction;
 import io.nickbaynham.automation.selfhealing.WebQuery;
+import me.xdrop.fuzzywuzzy.FuzzySearch;
+import me.xdrop.fuzzywuzzy.model.ExtractedResult;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WebController implements WebAction, WebQuery {
     private WebDriver driver;
@@ -46,8 +55,16 @@ public class WebController implements WebAction, WebQuery {
     }
 
     @Override
-    public void select(String element) {
-        // to do
+    public void selectRadio(String cssSelector) {
+        driver.findElement(By.cssSelector(cssSelector)).click();
+    }
+
+    @Override
+    public void select(String token, String locator) throws ElementNotFoundException {
+        WebElement element = driver.findElement(By.cssSelector(locator));
+        Select select = new Select(element);
+        String optionValue = getOptionValue(select.getOptions(), token);
+        select.selectByValue(optionValue);
     }
 
     @Override
@@ -219,5 +236,32 @@ public class WebController implements WebAction, WebQuery {
     @Override
     public String getHtml() {
         return driver.getPageSource();
+    }
+
+    private String getOptionValue(List<WebElement> options, String matcher) throws ElementNotFoundException {
+
+        // Initialize Result Set
+
+        List<String> optionValues = new ArrayList<>();
+        List<String> optionsVisibleText = new ArrayList<>();
+
+        for (WebElement option : options) {
+            optionValues.add(option.getAttribute("value"));
+            optionsVisibleText.add(option.getText());
+        }
+
+        if (optionValues.isEmpty() || optionsVisibleText.isEmpty()) throw new ElementNotFoundException("Element Not Found: " + "=" + matcher);
+
+        // Fuzzy Search by Inner Text
+
+        ExtractedResult resultValues = FuzzySearch.extractOne(matcher, optionValues);
+        ExtractedResult resultVisibleText = FuzzySearch.extractOne(matcher, optionsVisibleText);
+        int scoreValues = resultValues.getScore();
+        int scoreVisibleText = resultVisibleText.getScore();
+        if (scoreValues > scoreVisibleText) {
+            return options.get(resultValues.getIndex()).getAttribute("value");
+        } else {
+            return options.get(resultVisibleText.getIndex()).getAttribute("value");
+        }
     }
 }

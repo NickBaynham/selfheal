@@ -9,7 +9,6 @@ import io.nickbaynham.automation.selfhealing.Tag;
 import io.nickbaynham.automation.selfhealing.controllers.WebController;
 import io.nickbaynham.automation.selfhealing.controllers.DocumentController;
 import io.nickbaynham.automation.selfhealing.controllers.ElementNotFoundException;
-import org.openqa.selenium.WebElement;
 
 import static junit.framework.TestCase.*;
 
@@ -83,5 +82,34 @@ public class SelfHealStepdefs {
         System.out.println("Toggle " + token + " with locator: " + checkBox);
         actions.highlight(checkBox);
         actions.click(checkBox);
+    }
+
+    @Then("radio button option {string} is not selected")
+    public void radioButtonOptionIsNotSelected(String desiredOption) throws ElementNotFoundException {
+        String radioButtonSelector = doc.getLocator(Tag.radio, desiredOption);
+        actions.highlight(radioButtonSelector);
+        assertFalse(query.isSelected(radioButtonSelector));
+    }
+
+    @Then("radio button {string} is selected")
+    public void radioButtonIsSelected(String desiredOption) throws ElementNotFoundException {
+        String radioButtonSelector = doc.getLocator(Tag.radio, desiredOption);
+        actions.highlight(radioButtonSelector);
+        assertTrue(query.isSelected(radioButtonSelector));
+    }
+
+    @When("I click on radio button {string}")
+    public void iClickOnRadioButton(String desiredOption) throws ElementNotFoundException {
+        String radioButtonSelector = doc.getLocator(Tag.radio, desiredOption);
+        System.out.println("Click radio button option " + desiredOption + " selector: " + radioButtonSelector);
+        actions.highlight(radioButtonSelector);
+        actions.click(radioButtonSelector);
+    }
+
+    @Then("I select {string} from the {string} drop-down")
+    public void iSelectFromTheDropDown(String option, String token) throws ElementNotFoundException {
+        String selectCssSelector = doc.getLocator(Tag.select, token);
+        actions.highlight(selectCssSelector);
+        actions.select(option, selectCssSelector);
     }
 }
