@@ -1,3 +1,4 @@
+# Requires running local server: Go to html folder in resources and run server.bat
 Feature: As a tester, I want to fill out the form on the page and save it
   Scenario: Form Entry using automatic locators
     Given I have a "Chrome" browser
