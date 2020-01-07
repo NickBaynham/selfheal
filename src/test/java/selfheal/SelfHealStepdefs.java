@@ -9,7 +9,6 @@ import io.nickbaynham.automation.selfhealing.Tag;
 import io.nickbaynham.automation.selfhealing.controllers.WebController;
 import io.nickbaynham.automation.selfhealing.controllers.DocumentController;
 import io.nickbaynham.automation.selfhealing.controllers.ElementNotFoundException;
-
 import static junit.framework.TestCase.*;
 
 public class SelfHealStepdefs {
