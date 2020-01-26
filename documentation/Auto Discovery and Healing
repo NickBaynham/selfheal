@@ -1,0 +1,11 @@
+Auto Discovery and Healing
+
+Welcome to the auto discovery and healing framework example. The framework provides experiments and examples of automatically finding elements on a web page
+so that Selenium can successfully interact with them. Once tests can interact with the elements they describe, the locators that were automatically
+discovered can be cached for fast access. If they should fail though, the framework will attempt to "self-heal" - in other words, broken locators will
+be re-recorded using the same strategies.
+
+1. The Challenge of Test Automation
+
+When we are ready to automate test cases, we could write the high level test steps. For this demonstration we will show that the steps can be provided in cucumber format,
+although you might just as easily write them using an interface as a unit test.
