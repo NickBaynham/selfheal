@@ -1,0 +1,23 @@
+{
+  "Id": "Form-001",
+  "description": "Fill in the form using only required fields",
+  "url": "https://www.toolsqa.com/automation-practice-form/",
+  "steps": [
+    {
+      "id": 1,
+      "description": "Enter First Name",
+      "type": "TextInput",
+      "label": "first name"
+    },
+    {
+      "id": 2,
+      "description": "Enter Last Name",
+      "type": "TextInput",
+      "label": "last name"
+    }
+  ],
+  "testData": [
+    { "tc-1": [ "Dan", ",Steele"] },
+    { "tc-2": [ "Mark", "LongLastNameCase" ] }
+  ]
+}

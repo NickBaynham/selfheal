@@ -92,7 +92,7 @@ public class WebController implements WebAction, WebQuery {
     }
 
     private void chrome() {
-        System.setProperty("webdriver.chrome.driver", "C:\\webdriver\\chromedriver_v78\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "/selenium/chromedriver");
         driver = new ChromeDriver();
     }
 

@@ -1,0 +1,29 @@
+{
+  "url": "http://localhost:7800/example1.html",
+  "fields": [
+    {
+      "id": 1,
+      "label": "First Name",
+      "type": "field",
+      "data": "Scott"
+    },
+    {
+      "id": 2,
+      "label": "Last Name",
+      "type": "field",
+      "data": "Steele"
+    },
+    {
+      "id": 3,
+      "label": "Username",
+      "type": "field",
+      "data": "SSteele"
+    },
+    {
+      "id": 4,
+      "label": "City",
+      "type": "field",
+      "data": "Birmingham"
+    }
+  ]
+}
