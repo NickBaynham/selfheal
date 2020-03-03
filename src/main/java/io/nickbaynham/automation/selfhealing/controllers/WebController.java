@@ -26,6 +26,10 @@ public class WebController implements WebAction, WebQuery {
         this.setup(browser);
     }
 
+    public WebController(WebDriver driver) {
+        this.driver = driver;
+    }
+
     @Override
     public void inject(String script) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
