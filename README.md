@@ -1,7 +1,7 @@
 "# selfheal" 
 The Project contains examples of how it is possible to specify dynamic locators that can self-heal for open-source Web UI Testing Frameworks, such as those with Selenium-Webdriver.
 
-This project is managed with Maven in Java 13. Third-party libraries include JUnit, TestNG, Selenium-Webdriver 3, JSoup, and FuzzyWuzzy for lexical fuzzy matching.
+This project is managed with Maven in Java 8. Third-party libraries include JUnit, TestNG, Selenium-Webdriver 3, JSoup, and FuzzyWuzzy for lexical fuzzy matching.
 
 Download and build the project with Maven: mvn clean
 You can also load the project into IntelliJ for Java and run the demo. To run the demo, execute the test: src/test/java/selfHealingExamples/tests/regression/RegistrationSelfHealingWorkflowTest 
