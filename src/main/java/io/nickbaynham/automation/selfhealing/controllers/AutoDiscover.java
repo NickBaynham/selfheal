@@ -236,9 +236,11 @@ public class AutoDiscover {
     private static String flatten(Map<String, String> characteristics) {
         StringBuilder result = new StringBuilder();
         for (String key : characteristics.keySet()) {
-            result.append(key).append("=").append(characteristics.get(key)).append(";");
+            if (! key.equalsIgnoreCase("cssSelector")) {
+                result.append(key).append(characteristics.get(key));
+            }
         }
-        return result.toString();
+        return result.toString().replace(" ", "");
     }
 
     /**
@@ -258,12 +260,15 @@ public class AutoDiscover {
         }
         String locator = cache.getProperty(key);
         if (locator == null) throw new CachedLocatorNotFound("Locator not in cache: " + key);
+        System.out.println("Using Cached CSS Selector: " + locator);
         return locator;
     }
 
     private static void loadCache() throws IOException {
         cache = new Properties();
         InputStream input = new FileInputStream("src/test/resources/cache/cache.properties");
+        cache.load(input);
+        System.out.println("Properties loaded: " + cache.size());
     }
 
     /**
