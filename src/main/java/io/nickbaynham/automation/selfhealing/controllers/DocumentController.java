@@ -37,6 +37,16 @@ public class DocumentController implements Locate {
         elementsByTag();
     }
 
+    public List<Element> filterElements(List<Element> elements, WebElementPredicate predicate) {
+        List<Element> result = new ArrayList<>();
+        for (Element element : elements) {
+            if (predicate.test(element)) {
+                result.add(element);
+            }
+        }
+        return result;
+    }
+
     private void elementsByTag() {
         for (Tag tag : Tag.values()) {
             elements.put(tag.toString(), document.getElementsByTag(tag.toString()));

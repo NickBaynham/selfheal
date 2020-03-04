@@ -21,6 +21,7 @@ import java.util.List;
 
 public class WebController implements WebAction, WebQuery {
     private WebDriver driver;
+    private static WebController webController;
 
     public WebController(Browser browser) throws BrowserNotAvailableException {
         this.setup(browser);
@@ -28,6 +29,12 @@ public class WebController implements WebAction, WebQuery {
 
     public WebController(WebDriver driver) {
         this.driver = driver;
+    }
+
+    public static WebController getInstance() {
+        System.setProperty("webdriver.chrome.driver", "/src/test/resources/drivers/chromedriver.exe");
+        if (webController == null) webController = new WebController(new ChromeDriver());
+        return webController;
     }
 
     @Override
@@ -267,5 +274,9 @@ public class WebController implements WebAction, WebQuery {
         } else {
             return options.get(resultVisibleText.getIndex()).getAttribute("value");
         }
+    }
+
+    public WebDriver getDriver() {
+        return driver;
     }
 }
