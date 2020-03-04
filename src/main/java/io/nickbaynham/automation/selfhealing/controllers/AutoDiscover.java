@@ -123,8 +123,8 @@ public class AutoDiscover {
 
         // If Characteristics contain a label, use this characteristic to locate the element
         // Note that you must have an element with tag label that includes attribute "for" specifying the id of another element
-        if (characteristics.containsKey("label")) {
-            List<Element> labelElements = filterElements(elements, (Element element) -> element.tagName().equals(characteristics.get("Label")));
+        if (characteristics.containsKey("Label")) {
+            List<Element> labelElements = filterElements(elements, (Element element) -> element.tagName().equals("label"));
             try {
                 return filterByLabel(labelElements, characteristics);
             } catch (Exception e) {
@@ -236,11 +236,17 @@ public class AutoDiscover {
     private static String flatten(Map<String, String> characteristics) {
         StringBuilder result = new StringBuilder();
         for (String key : characteristics.keySet()) {
-            result.append(key);
+            result.append(key).append("=").append(characteristics.get(key)).append(";");
         }
         return result.toString();
     }
 
+    /**
+     * getCachedLocator - Retrieve a Locator from the Cache
+     * @param characteristics - Used to create a unique key
+     * @return - The locator, should it exist in the cache
+     * @throws CachedLocatorNotFound - If not found
+     */
     private static String getCachedLocator(Map<String,String> characteristics) throws CachedLocatorNotFound {
         String key = flatten(characteristics);
         if (cache == null) {

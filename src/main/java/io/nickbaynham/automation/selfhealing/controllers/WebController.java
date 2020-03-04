@@ -8,10 +8,7 @@ import me.xdrop.fuzzywuzzy.FuzzySearch;
 import me.xdrop.fuzzywuzzy.model.ExtractedResult;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
@@ -32,9 +29,39 @@ public class WebController implements WebAction, WebQuery {
     }
 
     public static WebController getInstance() {
-        System.setProperty("webdriver.chrome.driver", "/src/test/resources/drivers/chromedriver.exe");
+        String OS = System.getProperty("os.name").toLowerCase();
+        if (isWindows(OS)) {
+            System.setProperty("webdriver.chrome.driver", "/src/test/resources/drivers/chromedriver.exe");
+        } else if (isMac(OS)) {
+            System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/mac/chromedriver");
+        } else if (isUnix(OS)) {
+            throw new WebDriverException("Please add the Unix driver to resouces and update the code.");
+        } else if (isSolaris(OS)) {
+            throw new WebDriverException("Please add the Solaris driver to resouces and update the code.");
+        } else {
+            throw new WebDriverException("Your OS is not support!!");
+        }
+
         if (webController == null) webController = new WebController(new ChromeDriver());
         return webController;
+    }
+
+    public static boolean isWindows(String OS) {
+        return (OS.contains("win"));
+    }
+
+    public static boolean isMac(String OS) {
+        return (OS.contains("mac"));
+    }
+
+    public static boolean isUnix(String OS) {
+        return (OS.contains("nix") || OS.contains("nux") || OS.indexOf("aix") > 0 );
+    }
+
+    public static boolean isSolaris(String OS) {
+
+        return (OS.contains("sunos"));
+
     }
 
     @Override
@@ -100,6 +127,7 @@ public class WebController implements WebAction, WebQuery {
     @Override
     public void close() {
         if (driver != null) driver.quit();
+        AutoDiscover.serializeCache();
     }
 
     private void chrome() {

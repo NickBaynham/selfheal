@@ -5,12 +5,11 @@ import org.openqa.selenium.WebDriver;
 
 public class RegistrationSelfHealingPageObjectsWorkflow {
     private WebDriver driver;
-    public RegistrationSelfHealingPageObjectsWorkflow(WebDriver driver) {
-        this.driver = driver;
+    public RegistrationSelfHealingPageObjectsWorkflow() {
     }
 
     public boolean completeRegistration(String firstName, String lastName, String username, String city, String state, String zip, boolean acceptTerms) throws Exception {
-        RegistrationFormSelfHealing registrationForm = new RegistrationFormSelfHealing(driver);
+        RegistrationFormSelfHealing registrationForm = new RegistrationFormSelfHealing();
         registrationForm.goToPage();
         registrationForm.enterFirstName("Ada");
         registrationForm.enterLastName("Lovelace");

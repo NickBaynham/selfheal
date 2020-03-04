@@ -1,6 +1,7 @@
 package selfHealingExamples.tests.registration;
 
 import framework.pageObjects.RegistrationForm;
+import io.nickbaynham.automation.selfhealing.controllers.WebController;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
@@ -10,7 +11,7 @@ public class RegistrationPageObjects extends BaseTest {
 
     @Test
     public void TestRegistration() {
-        RegistrationForm registrationForm = new RegistrationForm(getDriver());
+        RegistrationForm registrationForm = new RegistrationForm(WebController.getInstance().getDriver());
         registrationForm.goToPage();
         registrationForm.enterFirstName("Ada");
         registrationForm.enterLastName("Lovelace");

@@ -5,6 +5,7 @@ import io.nickbaynham.automation.selfhealing.BrowserNotAvailableException;
 import io.nickbaynham.automation.selfhealing.Tag;
 import io.nickbaynham.automation.selfhealing.controllers.DocumentController;
 import io.nickbaynham.automation.selfhealing.controllers.ElementNotFoundException;
+import io.nickbaynham.automation.selfhealing.controllers.WebController;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
@@ -14,7 +15,7 @@ public class RegistrationAutoDiscoveryPageObjectsTest extends BaseTest {
 
     @Test
     public void TestRegistrationPageObjectsWithAutoDiscovery() throws ElementNotFoundException, BrowserNotAvailableException {
-        RegistrationFormAutoDiscovery registration = new RegistrationFormAutoDiscovery(getDriver());
+        RegistrationFormAutoDiscovery registration = new RegistrationFormAutoDiscovery(WebController.getInstance().getDriver());
         registration.goToPage();
         registration.enterText("First Name", "Ada");
         registration.enterText("Last Name", "Lovelace");

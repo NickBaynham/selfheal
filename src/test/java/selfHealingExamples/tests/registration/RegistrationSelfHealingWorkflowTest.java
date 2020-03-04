@@ -9,7 +9,7 @@ public class RegistrationSelfHealingWorkflowTest extends BaseTest {
 
     @Test
     public void TestRegistrationWorkflow() throws Exception {
-        RegistrationSelfHealingPageObjectsWorkflow registrationWorkflow = new RegistrationSelfHealingPageObjectsWorkflow(getDriver());
+        RegistrationSelfHealingPageObjectsWorkflow registrationWorkflow = new RegistrationSelfHealingPageObjectsWorkflow();
         assertTrue(registrationWorkflow.completeRegistration(
                 "John",
                 "Jones",

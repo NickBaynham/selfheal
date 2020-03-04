@@ -1,6 +1,7 @@
 package selfHealingExamples.tests.registration;
 
 import framework.pageObjects.RegistrationForm;
+import io.nickbaynham.automation.selfhealing.controllers.WebController;
 import org.testng.annotations.Test;
 import selfHealingExamples.workflows.RegistrationWorkflow;
 
@@ -11,7 +12,7 @@ public class RegistrationWorkflowTest extends BaseTest {
 
     @Test
     public void TestRegistrationWorkflow() {
-        RegistrationWorkflow registrationWorkflow = new RegistrationWorkflow(getDriver());
+        RegistrationWorkflow registrationWorkflow = new RegistrationWorkflow(WebController.getInstance().getDriver());
         assertTrue(registrationWorkflow.completeRegistration(
                 "John",
                 "Jones",
