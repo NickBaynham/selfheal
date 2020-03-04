@@ -20,6 +20,7 @@ import java.util.*;
  *    Characteristics:
  *
  *    Name              Description
+ *    ---------------   -------------------------------------------------------------------------------------------
  *    Scope             A CSS Selector to find an element that should be the root for discovery purposes
  *    TagName           The tag name: input, button, etc
  *    Attributes        A comma-separated list of attributes to search in (the best match based on combined)
@@ -266,7 +267,7 @@ public class AutoDiscover {
      * @param predicate = The method for matching
      * @return = A list of filtered elements based on the method criteria
      */
-    public static List<Element> filterElements(List<Element> elements, WebElementPredicate predicate) {
+    private static List<Element> filterElements(List<Element> elements, WebElementPredicate predicate) {
         List<Element> result = new ArrayList<>();
         for (Element element : elements) {
             if (predicate.test(element)) {
