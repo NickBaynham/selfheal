@@ -1,4 +1,5 @@
 # Requires running local server: Go to html folder in resources and run server.bat
+# Or on Mac, enter the same command in the file into terminal
 Feature: New User Registration
   Scenario: As a new user, I perform the registration workflow
     Given I have a "Chrome" browser

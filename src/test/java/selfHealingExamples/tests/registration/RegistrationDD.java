@@ -3,15 +3,21 @@ package selfHealingExamples.tests.registration;
 import io.nickbaynham.automation.selfhealing.controllers.WebController;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import selfHealingExamples.dataProviders.RegistrationData;
 import static org.testng.AssertJUnit.assertEquals;
 
 public class RegistrationDD extends BaseTest {
 
+    private WebDriver driver = WebController.getInstance().getDriver();
+
     @Test(dataProvider = "registration", dataProviderClass= RegistrationData.class)
     public void TestRegistration(String firstName, String lastName, String username, String city, String state, String zip, boolean acceptTerms) {
-        WebDriver driver = WebController.getInstance().getDriver();
+
         driver.get("http://localhost:7800/bootstrap1.html#");
         driver.findElement(By.xpath("//label[contains(.,'First name')]/../input")).sendKeys(firstName);
         driver.findElement(By.xpath("//label[contains(.,'Last name')]/../input")).sendKeys(lastName);

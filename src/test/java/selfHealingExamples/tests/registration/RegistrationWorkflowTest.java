@@ -20,6 +20,6 @@ public class RegistrationWorkflowTest extends BaseTest {
                 "Alberqurque",
                 "NM",
                 "87109",
-                false));
+                true));
     }
 }

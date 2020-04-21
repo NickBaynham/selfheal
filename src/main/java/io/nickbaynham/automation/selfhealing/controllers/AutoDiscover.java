@@ -10,7 +10,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- *    A new version that will provide static methods to to handle dynamic locators.
+ *    A new version that will provide static methods to handle dynamic locators.
  *    First, a lookup in cache to verify that it is not already available
  *    Followed by returning the cached value, if available
  *    Should the cached value fail, we will need to self-heal by autonomously looking for a new locator
@@ -53,7 +53,6 @@ public class AutoDiscover {
      *
      * @throws ElementNotFoundException - If a locator cannot be generated based on the characteristics provided
      */
-    //TODo: Make this a Factory Method so it is easier to specify the characteristics
     public static String getLocator(Map<String, String> characteristics) throws Exception {
 
         // If a cached value matching the characteristics already exists, return the cached value for speed of test execution
@@ -357,22 +356,4 @@ public class AutoDiscover {
     private static final String CACHE_PATH = "src/test/resources/cache/cache.properties";  //ToDO This should be a property of the testing framework
     private static final int FUZZY_SCORING_LIMIT = 50;  // You can tune auto discovery fuzzy matching by increasing this value so that matches below a
                                                        // specific value result in a fail (prevents false positives,ie, picking the closest match anyway when label shouldn't be found)
-}
-
-/**
- *   CachedLocatorNotFound - Exception thrown if the required locator is not in the cache
- */
-class CachedLocatorNotFound extends Exception {
-    CachedLocatorNotFound(String message) {
-        super(message);
-    }
-}
-
-/**
- *   NoElementsFoundException - thrown when filtering results in an empty list
- */
-class NoElementsFoundException extends Exception {
-    NoElementsFoundException(String message) {
-        super(message);
-    }
 }

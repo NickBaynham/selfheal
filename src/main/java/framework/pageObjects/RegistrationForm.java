@@ -74,6 +74,10 @@ public class RegistrationForm {
         this.acceptTerms.click();
     }
 
+    public void clickAcceptTerms(boolean state) {
+        if (state) this.acceptTerms.click();
+    }
+
     public void clickRegisterButton() {
         this.registerButton.click();
     }

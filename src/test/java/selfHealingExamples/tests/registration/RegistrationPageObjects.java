@@ -11,7 +11,6 @@ public class RegistrationPageObjects extends BaseTest {
 
     @Test
     public void TestRegistration() {
-        RegistrationForm registrationForm = new RegistrationForm(WebController.getInstance().getDriver());
         registrationForm.goToPage();
         registrationForm.enterFirstName("Ada");
         registrationForm.enterLastName("Lovelace");
@@ -23,4 +22,5 @@ public class RegistrationPageObjects extends BaseTest {
         registrationForm.clickRegisterButton();
         assertEquals(registrationForm.getTitle(), "Self Healing Test Page");
     }
+    RegistrationForm registrationForm = new RegistrationForm(WebController.getInstance().getDriver());
 }

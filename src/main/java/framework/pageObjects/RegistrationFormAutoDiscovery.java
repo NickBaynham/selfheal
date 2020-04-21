@@ -17,8 +17,9 @@ public class RegistrationFormAutoDiscovery {
 
     public RegistrationFormAutoDiscovery(WebDriver driver) throws BrowserNotAvailableException {
         this.driver = driver;
+        goToPage();
         final String HTML_SOURCE_CODE = driver.getPageSource();
-        DocumentController documentController = DocumentController.getInstance(HTML_SOURCE_CODE);
+        documentController = DocumentController.getInstance(HTML_SOURCE_CODE);
         actions = new WebController(driver);
     }
 

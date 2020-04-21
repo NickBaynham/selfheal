@@ -131,7 +131,7 @@ public class WebController implements WebAction, WebQuery {
     }
 
     private void chrome() {
-        System.setProperty("webdriver.chrome.driver", "/selenium/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/mac/chromedriver");
         driver = new ChromeDriver();
     }
 

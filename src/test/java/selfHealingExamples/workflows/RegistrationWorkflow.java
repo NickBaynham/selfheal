@@ -12,13 +12,13 @@ public class RegistrationWorkflow {
     public boolean completeRegistration(String firstName, String lastName, String username, String city, String state, String zip, boolean acceptTerms) {
         RegistrationForm registrationForm = new RegistrationForm(driver);
         registrationForm.goToPage();
-        registrationForm.enterFirstName("Ada");
-        registrationForm.enterLastName("Lovelace");
-        registrationForm.enterUsername("ALovelace");
-        registrationForm.enterCity("Orlando");
-        registrationForm.enterState("FL");
-        registrationForm.enterZip("32832");
-        registrationForm.clickAcceptTerms();
+        registrationForm.enterFirstName(firstName);
+        registrationForm.enterLastName(lastName);
+        registrationForm.enterUsername(username);
+        registrationForm.enterCity(city);
+        registrationForm.enterState(state);
+        registrationForm.enterZip(zip);
+        registrationForm.clickAcceptTerms(acceptTerms);
         registrationForm.clickRegisterButton();
         return (registrationForm.getTitle().equals("Self Healing Test Page"));
     }
