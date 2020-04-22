@@ -3,7 +3,7 @@
 Feature: New User Registration
   Scenario: As a new user, I perform the registration workflow
     Given I have a "Chrome" browser
-    When I navigate to "http://http://localhost:7800/bootstrap1.html#"
+    When I navigate to "http://localhost:7800/bootstrap1.html"
     Then I enter "Ada" in the "First Name" field
     Then I enter "Lovelace" in the "Last Name" field
     Then I enter "ALovelace" in the "Username" field

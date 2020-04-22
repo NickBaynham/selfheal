@@ -16,9 +16,9 @@ public class DocumentController implements Locate {
 
     private static DocumentController documentController;
 
-    private String html;
-    private Document document;
-    private Map<String, Elements> elements = new HashMap<>();
+    private final String html;
+    private final Document document;
+    private final Map<String, Elements> elements = new HashMap<>();
 
     private DocumentController(String html) {
         this.html = html;
