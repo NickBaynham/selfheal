@@ -17,7 +17,7 @@ public class UsingJSOUP extends BaseTest {
         driver.get("http://localhost:7800/bootstrap1.html#");
         final String HTML_SOURCE_CODE = driver.getPageSource();
         Document document = Jsoup.parse(HTML_SOURCE_CODE);
-        int inputs = document.body().getElementsByTag("input").size();
-        assertEquals(7, inputs);
+        int numberOfInputs = document.body().getElementsByTag("input").size();
+        assertEquals(7, numberOfInputs);
     }
 }

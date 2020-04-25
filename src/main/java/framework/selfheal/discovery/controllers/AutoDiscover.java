@@ -54,31 +54,17 @@ public class AutoDiscover {
      * @throws ElementNotFoundException - If a locator cannot be generated based on the characteristics provided
      */
     public static String getLocator(Map<String, String> characteristics) throws Exception {
-
-        // If a cached value matching the characteristics already exists, return the cached value for speed of test execution
-
         String locator = null; // we will attempt to find a locator As a CSS Selector String
         try {
-            locator = getCachedLocator(characteristics);
-            return checkWithSelenium(characteristics, locator);
-        } catch (CachedLocatorNotFound e) {
-            System.out.println("Locator was not in the cache: " + e.getMessage());
-           try {
-                // try to find a locator using auto-discovery
-                locator = findElement(characteristics);
-                checkWithSelenium(characteristics, locator);  // we can use Selenium to check that is present, visible, enabled
-                cache.put(flatten(characteristics), locator); // it's been confirmed, adding to cache
-                return locator;
+            // try to find a locator using auto-discovery
+            locator = findElement(characteristics);
+            checkWithSelenium(characteristics, locator);  // we can use Selenium to check that is present, visible, enabled
+            cache.put(flatten(characteristics), locator); // it's been confirmed, adding to cache
+            return locator;
         } catch (Exception ex) {                              // note that if the cached locator casused a problem it will be overwritten by discovery
-                System.out.println("Auto Discovery: Couldn't find the element requested dynamically: " + ex.getMessage());
-                showCharacteristics(characteristics);
-                // if it was in the cache but expected to be overridden then we can remove it
-               if (cache.get(flatten(characteristics)) != null) {
-                   cache.remove(flatten(characteristics));
-                    serializeCache();  // serialize the change in case we run into a problem later
-               }
-                throw ex; // Auto Discovery failed given the provided characteristics for locating an element
-            }
+            System.out.println("Auto Discovery: Couldn't find the element requested dynamically: " + ex.getMessage());
+            showCharacteristics(characteristics);
+            throw ex; // Auto Discovery failed given the provided characteristics for locating an element
         }
     }
 
@@ -248,7 +234,7 @@ public class AutoDiscover {
      * @return - The locator, should it exist in the cache
      * @throws CachedLocatorNotFound - If not found
      */
-    private static String getCachedLocator(Map<String,String> characteristics) throws CachedLocatorNotFound {
+    public static String getCachedLocator(Map<String,String> characteristics) throws CachedLocatorNotFound {
         String key = flatten(characteristics);
         if (cache == null) {
             try {

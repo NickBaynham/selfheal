@@ -1,6 +1,7 @@
 package framework.pageObjects.selfheal;
 
 import framework.selfheal.discovery.controllers.AutoDiscover;
+import framework.selfheal.discovery.controllers.ElementNotFoundException;
 import framework.selfheal.discovery.controllers.WebController;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -69,9 +70,27 @@ public class RegistrationFormSelfHealing {
      * @throws Exception - When we are not able to find a matching element based on the characteristics provided
      */
     private void enterText(String label, String text) throws Exception {
-        WebElement element = WebController.getInstance().getDriver().findElement(By.cssSelector(AutoDiscover.getLocator(getInputCharacteristics(label))));
-        element.clear();
-        element.sendKeys(text);
+        try {
+            WebElement element = WebController.getInstance().getDriver().findElement(By.cssSelector(AutoDiscover.getCachedLocator(getInputCharacteristics(label))));
+            element.isDisplayed();
+            element.isEnabled();
+            element.clear();
+            element.sendKeys(text);
+            return;
+        } catch (Exception e) {
+            System.out.println("Cached Element Failed or Not Found!");
+        }
+
+        // Use discovery and cache new value
+        try {
+            WebElement element = WebController.getInstance().getDriver().findElement(By.cssSelector(AutoDiscover.getLocator(getInputCharacteristics(label))));
+            element.isDisplayed();
+            element.isEnabled();
+            element.clear();
+            element.sendKeys(text);
+        } catch (Exception e) {
+            throw new ElementNotFoundException("Strategy Failed for input: " + label);
+        }
     }
 
     /**
@@ -80,18 +99,52 @@ public class RegistrationFormSelfHealing {
      * @throws Exception - If we can't find it
      */
     private void clickCheckBox(String label) throws Exception {
-        WebElement element = WebController.getInstance().getDriver().findElement(By.cssSelector(AutoDiscover.getLocator(getInputCharacteristics(label))));
-        element.click();
+        try {
+            WebElement element = WebController.getInstance().getDriver().findElement(By.cssSelector(AutoDiscover.getCachedLocator(getInputCharacteristics(label))));
+            element.isDisplayed();
+            element.isEnabled();
+            element.click();
+            return;
+        } catch (Exception e) {
+            System.out.println("Cached Element Failed or Not Found!");
+        }
+
+        // Use discovery and cache new value
+        try {
+            WebElement element = WebController.getInstance().getDriver().findElement(By.cssSelector(AutoDiscover.getLocator(getInputCharacteristics(label))));
+            element.isDisplayed();
+            element.isEnabled();
+            element.click();
+        } catch (Exception e) {
+            throw new ElementNotFoundException("Strategy Failed for check box: " + label);
+        }
     }
 
     /**
      * A discovery method for a button
-     * @param text - The label on the button is used to find it
+     * @param label - The label on the button is used to find it
      * @throws Exception - When we failed to find it
      */
-    private void clickButton(String text) throws Exception {
-        WebElement element = WebController.getInstance().getDriver().findElement(By.cssSelector(AutoDiscover.getLocator(getButtonCharacteristics(text))));
-        element.click();
+    private void clickButton(String label) throws Exception {
+        try {
+            WebElement element = WebController.getInstance().getDriver().findElement(By.cssSelector(AutoDiscover.getCachedLocator(getInputCharacteristics(label))));
+            element.isDisplayed();
+            element.isEnabled();
+            element.click();
+            return;
+        } catch (Exception e) {
+            System.out.println("Cached Element Failed or Not Found!");
+        }
+
+        // Use discovery and cache new value
+        try {
+            WebElement element = WebController.getInstance().getDriver().findElement(By.cssSelector(AutoDiscover.getLocator(getInputCharacteristics(label))));
+            element.isDisplayed();
+            element.isEnabled();
+            element.click();
+        } catch (Exception e) {
+            throw new ElementNotFoundException("Strategy Failed for button: " + label);
+        }
     }
 
     public String getTitle() {

@@ -1,5 +1,6 @@
 package framework.pageObjects.classic;
 
+import framework.selfheal.discovery.controllers.WebController;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -31,8 +32,7 @@ public class RegistrationForm {
     @FindBy(xpath = "//button[contains(.,'Register')]")
     private WebElement registerButton;
 
-    public RegistrationForm(WebDriver driver) {
-        this.driver = driver;
+    public RegistrationForm() {
         PageFactory.initElements(driver, this);
     }
 
@@ -86,5 +86,5 @@ public class RegistrationForm {
         return driver.getTitle();
     }
 
-    private WebDriver driver;
+    private WebDriver driver = WebController.getInstance().getDriver();
 }

@@ -1,7 +1,7 @@
 package framework.selfheal.discovery.controllers;
 
 public class ElementNotFoundException extends Exception {
-    ElementNotFoundException(String value) {
+    public ElementNotFoundException(String value) {
         super(value);
     }
 }

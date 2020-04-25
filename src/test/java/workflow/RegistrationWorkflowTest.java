@@ -12,7 +12,7 @@ public class RegistrationWorkflowTest extends BaseTest {
 
     @Test
     public void workflowTest() {
-        RegistrationWorkflow registrationWorkflow = new RegistrationWorkflow(WebController.getInstance().getDriver());
+        RegistrationWorkflow registrationWorkflow = new RegistrationWorkflow();
         assertTrue(registrationWorkflow.completeRegistration(
                 "John",
                 "Jones",

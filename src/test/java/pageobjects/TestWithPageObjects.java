@@ -2,7 +2,6 @@ package pageobjects;
 
 import base.BaseTest;
 import framework.pageObjects.classic.RegistrationForm;
-import framework.selfheal.discovery.controllers.WebController;
 import org.testng.annotations.Test;
 
 import static org.testng.AssertJUnit.assertEquals;
@@ -22,5 +21,5 @@ public class TestWithPageObjects extends BaseTest {
         registrationForm.clickRegisterButton();
         assertEquals(registrationForm.getTitle(), "Self Healing Test Page");
     }
-    RegistrationForm registrationForm = new RegistrationForm(WebController.getInstance().getDriver());
+    RegistrationForm registrationForm = new RegistrationForm();
 }

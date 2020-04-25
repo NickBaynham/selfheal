@@ -1,16 +1,14 @@
 package framework.workflow;
 
 import framework.pageObjects.classic.RegistrationForm;
+import framework.selfheal.discovery.controllers.WebController;
 import org.openqa.selenium.WebDriver;
 
 public class RegistrationWorkflow {
-    private WebDriver driver;
-    public RegistrationWorkflow(WebDriver driver) {
-        this.driver = driver;
-    }
+    private final WebDriver driver = WebController.getInstance().getDriver();
 
     public boolean completeRegistration(String firstName, String lastName, String username, String city, String state, String zip, boolean acceptTerms) {
-        RegistrationForm registrationForm = new RegistrationForm(driver);
+        RegistrationForm registrationForm = new RegistrationForm();
         registrationForm.goToPage();
         registrationForm.enterFirstName(firstName);
         registrationForm.enterLastName(lastName);
