@@ -1,10 +1,10 @@
-"# selfheal" 
+"# cucumber" 
 The Project contains examples of how it is possible to specify dynamic locators that can self-heal for open-source Web UI Testing Frameworks, such as those with Selenium-Webdriver.
 
 This project is managed with Maven in Java 8. Third-party libraries include JUnit, TestNG, Selenium-Webdriver 3, JSoup, and FuzzyWuzzy for lexical fuzzy matching.
 
 Download and build the project with Maven: mvn clean
-You can also load the project into IntelliJ for Java and run the demo. To run the demo, execute the test: src/test/java/selfHealingExamples/tests/regression/RegistrationSelfHealingWorkflowTest 
+You can also load the project into IntelliJ for Java and run the demo. To run the demo, execute the test: src/test/java/selfheal/tests/regression/RegistrationSelfHealingWorkflowTest 
 When you run this test it will use a workflow that in turn relies on the page object src/main/java/framework/pageObjects/RegistrationFormSelfHealing, which uses several auto discovery strategies to find elements on the page, make sure they work by testing with Selenium, add them to cache, and using them to execute the test.
 Note that this is just a stating point and a demo. If you wanted to use this approach on your projects you most likely would need to define your own strategies. The demo using a static HTML page, so real web sites require synchronization and may have more complex actions required. However, in theory, it would be possible to use this approach on any web site.
 

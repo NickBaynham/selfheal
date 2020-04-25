@@ -1,23 +1,23 @@
 {
-  "url": "http://localhost:7800/example1.html",
+  "url": "http://localhost:7800/bootstrap1.html",
   "fields": [
     {
       "id": 1,
       "label": "First Name",
       "type": "field",
-      "data": "Scott"
+      "data": "Janet"
     },
     {
       "id": 2,
       "label": "Last Name",
       "type": "field",
-      "data": "Steele"
+      "data": "Kim"
     },
     {
       "id": 3,
       "label": "Username",
       "type": "field",
-      "data": "SSteele"
+      "data": "J_Kim"
     },
     {
       "id": 4,
